@@ -6,14 +6,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MathProject.Models
 {
-    public enum Category
+    public enum Categories
     {
-        Trigonometry, Xd
+        Trygonometria,
+        Stereometria,
+        Planimetria,
+        FunkcjaKwadratowa
     }
     public class Question
     {
         public int ID { get; set; }
-        public string Category { get; set; }
+        public Categories Category { get; set; }
         public string Content { get; set; }
         public decimal CorrectAnswer { get; set; }
         public ICollection<Hint> Hints { get; set; }

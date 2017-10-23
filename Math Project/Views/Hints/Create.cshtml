@@ -12,10 +12,10 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="QuestionID" class="control-label"></label>
                 <input asp-for="QuestionID" class ="form-control" asp-items="ViewBag.QuestionID">
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
                 <input asp-for="Content" class="form-control" />

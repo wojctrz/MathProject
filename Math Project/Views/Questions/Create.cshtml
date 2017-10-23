@@ -1,5 +1,5 @@
 ﻿@model MathProject.Models.Question
-
+@using MathProject.Models;
 @{
     ViewData["Title"] = "Create";
 }
@@ -13,8 +13,18 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                @{
+
+                    var names = Enum.GetNames(typeof(Categories));
+
+                    var itemmms = new List<SelectListItem>();
+                    foreach (var item in names)
+                    {
+                        itemmms.Add(new SelectListItem{ Text = item });
+                    }
+                }
                 <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
+                <select asp-for="Category" class="form-control" asp-items="itemmms"></select>
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
             <div class="form-group">

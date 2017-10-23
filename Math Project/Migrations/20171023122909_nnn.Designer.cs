@@ -11,9 +11,10 @@ using System;
 namespace MathProject.Migrations
 {
     [DbContext(typeof(MathProjectContext))]
-    partial class MathProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20171023122909_nnn")]
+    partial class nnn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

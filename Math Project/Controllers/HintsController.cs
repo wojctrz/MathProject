@@ -44,22 +44,22 @@ namespace MathProject.Controllers
         }
 
         // GET: Hints/Create
-        public IActionResult Create(int id)
+        public IActionResult Create()
         {
-            _qid = id;
+     
             return View();
         }
 
         // POST: Hints/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost("[controller]/[action]/{questionid}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,QuestionID,Content,CorrectAnswer")] Hint hint)
+        public async Task<IActionResult> Create([Bind("Content,CorrectAnswer")] Hint hint, int questionid)
         {
             if (ModelState.IsValid)
             {
-                hint.QuestionID = _qid;
+                hint.QuestionID = questionid;
                 _context.Add(hint);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

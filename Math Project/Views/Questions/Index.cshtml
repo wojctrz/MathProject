@@ -41,7 +41,7 @@
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> | 
                 <a asp-action="AddHint" asp-route-id="@item.ID">Dodaj hinty lepiej</a> |
-                <a href="/Hints">Dodaj hinty</a>
+                <a href="/Hints/create/@item.ID">Dodaj hinty</a>
             </td>
         </tr>
 }
