@@ -40,23 +40,21 @@
 a:link
 {
     text-decoration: none;
-    color: #fcb5f9;
+    color: #2e3167;
 }
 
 a:hover
 {
     text-decoration: none;
-    color: #f800ff;
+    color: #3e5389;
 }
 
-a:visited 
-{
+a:visited {
     text-decoration: none;
-    color: #fcb5f9;
+    color: #2e3167;
 }
 
-a:hover:visited
-{
+a:visited:hover {
     text-decoration: none;
-    color: #ffd800;
+    color: #3e5389;
 }

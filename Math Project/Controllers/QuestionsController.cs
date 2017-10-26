@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MathProject.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MathProject.Controllers
 {
@@ -47,6 +48,7 @@ namespace MathProject.Controllers
         }
 
         // GET: Questions/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -57,6 +59,7 @@ namespace MathProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("ID,Category,Content,CorrectAnswer")] Question question)
         {
             if (ModelState.IsValid)

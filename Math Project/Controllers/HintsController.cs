@@ -12,7 +12,6 @@ namespace MathProject.Controllers
     public class HintsController : Controller
     {
         private readonly MathProjectContext _context;
-        private int _qid;
 
         public HintsController(MathProjectContext context)
         {

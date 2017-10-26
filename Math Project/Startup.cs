@@ -12,6 +12,10 @@ using Math_Project.Data;
 using Math_Project.Models;
 using Math_Project.Services;
 using MathProject.Models;
+using MathProject;
+using Microsoft.AspNetCore.Mvc.Razor;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace Math_Project
 {
@@ -34,6 +38,26 @@ namespace Math_Project
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredUniqueChars = 3;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
+
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
@@ -41,6 +65,7 @@ namespace Math_Project
             {
                 config.ModelBinderProviders.Insert(0, new InvariantDecimalModelBinderProvider());
             });
+
 
             services.AddDbContext<MathProjectContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MathProjectContext")));
