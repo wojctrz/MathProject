@@ -9,7 +9,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    background: #afafaf;
+    background: rgba(24, 109, 107, 0.87);
 }
 
 /* Carousel */
@@ -24,6 +24,7 @@
     width: 100%;
 }
 
+
 /* QR code generator */
 #qrCode {
     margin: 15px;
@@ -37,26 +38,46 @@
     }
 }
 
-a:link
-{
-    text-decoration: none;
-    color: #fcb5f9;
+.btn-tile{
+    font-size: large;
+    background-color: cadetblue;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    padding: 10px;
+    margin: 13px;
+    line-height: 155px;
+}
+.btn-default{
+    margin:13px;
 }
 
-a:hover
-{
+    .btn-tile:hover {
+        background-color: #114c57;
+    }
+.btn-back {
+    width: 200px;
+    height: 67px;
+    background-color: #000000;
+    margin:15px;
+    line-height:55px;
+}
+a:link {
     text-decoration: none;
-    color: #f800ff;
+    color: #808080;
 }
 
-a:visited 
-{
+a:hover {
     text-decoration: none;
-    color: #fcb5f9;
+    color: cadetblue;
 }
 
-a:hover:visited
-{
+a:visited {
     text-decoration: none;
-    color: #ffd800;
+    color: #808080;
+}
+
+a:hover:visited {
+    text-decoration: none;
+    color: cadetblue;
 }
