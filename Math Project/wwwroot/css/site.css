@@ -9,7 +9,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    background: rgba(24, 109, 107, 0.87);
+    background: #afafaf;
 }
 
 /* Carousel */
@@ -24,7 +24,6 @@
     width: 100%;
 }
 
-
 /* QR code generator */
 #qrCode {
     margin: 15px;
@@ -38,46 +37,26 @@
     }
 }
 
-.btn-tile{
-    font-size: large;
-    background-color: cadetblue;
-    width: 200px;
-    height: 200px;
-    text-align: center;
-    padding: 10px;
-    margin: 13px;
-    line-height: 155px;
-}
-.btn-default{
-    margin:13px;
+a:link
+{
+    text-decoration: none;
+    color: #fcb5f9;
 }
 
-    .btn-tile:hover {
-        background-color: #114c57;
-    }
-.btn-back {
-    width: 200px;
-    height: 67px;
-    background-color: #000000;
-    margin:15px;
-    line-height:55px;
-}
-a:link {
+a:hover
+{
     text-decoration: none;
-    color: #808080;
+    color: #f800ff;
 }
 
-a:hover {
+a:visited 
+{
     text-decoration: none;
-    color: cadetblue;
+    color: #fcb5f9;
 }
 
-a:visited {
+a:hover:visited
+{
     text-decoration: none;
-    color: #808080;
-}
-
-a:hover:visited {
-    text-decoration: none;
-    color: cadetblue;
+    color: #ffd800;
 }
