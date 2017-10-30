@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MathProject.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MathProject.Controllers
 {
@@ -70,7 +71,7 @@ namespace MathProject.Controllers
 
             return View(question);
         }
-
+        [Authorize]
         // GET: Questions/Create
         public IActionResult Create()
         {
@@ -80,6 +81,7 @@ namespace MathProject.Controllers
         // POST: Questions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Category,Content,CorrectAnswer")] Question question)
