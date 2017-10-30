@@ -12,6 +12,7 @@ using Math_Project.Data;
 using Math_Project.Models;
 using Math_Project.Services;
 using MathProject.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Math_Project
 {
@@ -30,9 +31,19 @@ namespace Math_Project
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredUniqueChars = 2;
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
@@ -47,7 +58,7 @@ namespace Math_Project
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -70,6 +81,8 @@ namespace Math_Project
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            MathProject.Helpers.RolesInitialize.CreateRoles(serviceProvider).Wait();    //dodaj role
         }
     }
 }

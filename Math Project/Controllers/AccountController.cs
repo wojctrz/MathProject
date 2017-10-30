@@ -222,7 +222,8 @@ namespace Math_Project.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                var roleresult = await _userManager.AddToRoleAsync(user, "Student");    //student to defaultowa rola
+                if ((result.Succeeded) && (roleresult.Succeeded))
                 {
                     _logger.LogInformation("User created a new account with password.");
 
@@ -235,6 +236,7 @@ namespace Math_Project.Controllers
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
+                AddErrors(roleresult);
             }
 
             // If we got this far, something failed, redisplay form
