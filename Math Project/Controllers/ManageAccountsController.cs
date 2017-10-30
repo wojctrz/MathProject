@@ -29,10 +29,10 @@ namespace MathProject.Controllers
         // GET: ManageAccounts
         public async Task<IActionResult> Index()
         {
-            var doopa = _context.Users.ToList();
-            foreach (var du in doopa)
+            var _users = _context.Users.ToList();
+            foreach (var _user in _users)
             {
-                du.Roles = await _UserManager.GetRolesAsync(du);
+                _user.Roles = await _UserManager.GetRolesAsync(_user);
             }
             return View(await _context.Users.ToListAsync());
         }
