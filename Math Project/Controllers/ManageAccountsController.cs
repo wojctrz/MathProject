@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Math_Project.Models;
 using Microsoft.Extensions.DependencyInjection;
+using MathProject.Models;
+using Math_Project.Controllers;
 
 namespace MathProject.Controllers
 {
@@ -37,79 +39,121 @@ namespace MathProject.Controllers
             return View(await _context.Users.ToListAsync());
         }
 
-        // GET: ManageAccounts/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: ManageAccounts/Create
-        public ActionResult Create()
+        public async Task<IActionResult> GrantTeacher(string id)
         {
-            return View();
-        }
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        // POST: ManageAccounts/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                var user = await _context.ApplicationUser.SingleAsync(u => u.Id == id);
+                var roleresult = await _UserManager.AddToRoleAsync(user, "Teacher");
             }
             catch
             {
-                return View();
+                return NotFound();
             }
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: ManageAccounts/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> GrantAdmin(string id)
         {
-            return View();
-        }
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        // POST: ManageAccounts/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
+                var user = await _context.ApplicationUser.SingleAsync(u => u.Id == id);
+                var roleresult = await _UserManager.AddToRoleAsync(user, "Admin");
             }
             catch
             {
-                return View();
+                return NotFound();
             }
+
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: ManageAccounts/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: ManageAccounts/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //// GET: ManageAccounts/Details/5
+        //public ActionResult Details(int id)
+        //{
+        //    return View();
+        //}
+
+        //// GET: ManageAccounts/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
+
+        //// POST: ManageAccounts/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add insert logic here
+
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+
+        //// GET: ManageAccounts/Edit/5
+        //public ActionResult Edit(int id)
+        //{
+        //    return View();
+        //}
+
+        //// POST: ManageAccounts/Edit/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add update logic here
+
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+
+        //// GET: ManageAccounts/Delete/5
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
+
+        //// POST: ManageAccounts/Delete/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
+
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }
