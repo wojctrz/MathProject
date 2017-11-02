@@ -51,6 +51,7 @@ namespace Math_Project
             services.AddMvc(config =>
             {
                 config.ModelBinderProviders.Insert(0, new InvariantDecimalModelBinderProvider());
+                config.ModelBinderProviders.Insert(0, new InvariantDoubleModelBinderProvider());
             });
 
             services.AddDbContext<MathProjectContext>(options =>

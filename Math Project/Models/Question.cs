@@ -18,7 +18,7 @@ namespace MathProject.Models
         public int ID { get; set; }
         public Categories Category { get; set; }
         public string Content { get; set; }
-        public decimal CorrectAnswer { get; set; }
+        public double CorrectAnswer { get; set; }
         public ICollection<Hint> Hints { get; set; }
     }
 }
