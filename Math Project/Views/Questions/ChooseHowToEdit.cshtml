@@ -1,0 +1,13 @@
+﻿@model MathProject.Models.Question
+@using MathProject.Models;
+
+@{
+    ViewData["Title"] = "ChooseToEdit";
+}
+
+<h2>Co chcesz teraz zrobić?</h2>
+
+    <a class="btn btn-tile" asp-action="Edit" asp-route-id="@Model.ID">Edytuj </a>
+    <a class="btn btn-tile" asp-action="Delete" asp-route-id="@Model.ID">Usuń zadanie </a>
+    <a class="btn btn-tile" asp-action="Details" asp-route-id="@Model.ID">Pokaż szczegóły </a>
+     

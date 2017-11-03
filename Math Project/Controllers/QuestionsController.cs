@@ -72,6 +72,12 @@ namespace MathProject.Controllers
             return View(question);
         }
         [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ChooseToEdit()
+        {
+
+            return View(await _context.Question.ToListAsync());
+        }
+        [Authorize(Roles = "Admin")]
         // GET: Questions/Create
         public IActionResult Create()
         {
@@ -94,7 +100,20 @@ namespace MathProject.Controllers
             }
             return View(question);
         }
+        public async Task<IActionResult> ChooseHowToEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var question = await _context.Question.SingleOrDefaultAsync(m => m.ID == id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+            return View(question);
+        }
         // GET: Questions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
