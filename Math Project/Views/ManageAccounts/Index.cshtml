@@ -9,43 +9,42 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            @if (item.Roles.Count == 0)
-            {
+        @foreach (var item in Model)
+        {
+            <tr>
                 <td>
-                   ni ma roli
+                    @Html.DisplayFor(modelItem => item.UserName)
                 </td>
-
-            }
-            @foreach (var role in item.Roles)
-            {
                 <td>
-                    @Html.DisplayFor(modelItem => role)
+                    @Html.DisplayFor(modelItem => item.Email)
                 </td>
-            }
-            <td>
-                <a asp-action="GrantTeacher" asp-route-id="@item.Id">Uczyń nauczycielem</a> |
-                <a asp-action="GrantAdmin" asp-route-id="@item.Id">Uczyń adminem</a> |
-            </td>
-        </tr>
-}
+                <td>
+                    @if (item.Roles.Count == 0)
+                    {
+                        <p>nie ma roli</p>
+                    }
+                    @foreach (var role in item.Roles)
+                    {
+                        @Html.DisplayFor(modelItem => role)
+                        <br />
+                    }
+                </td>
+                <td>
+                    <a asp-action="GrantTeacher" asp-route-id="@item.Id">Uczyń nauczycielem</a> |
+                    <a asp-action="GrantAdmin" asp-route-id="@item.Id">Uczyń adminem</a> |
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

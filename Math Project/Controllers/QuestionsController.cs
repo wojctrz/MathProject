@@ -71,7 +71,7 @@ namespace MathProject.Controllers
 
             return View(question);
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Teacher")]
         // GET: Questions/Create
         public IActionResult Create()
         {
@@ -81,7 +81,7 @@ namespace MathProject.Controllers
         // POST: Questions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Teacher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Category,Content,CorrectAnswer")] Question question)

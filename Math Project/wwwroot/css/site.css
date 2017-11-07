@@ -64,7 +64,7 @@
 }
 a:link {
     text-decoration: none;
-    color: #808080;
+    color: #454545;
 }
 
 a:hover {
@@ -74,7 +74,7 @@ a:hover {
 
 a:visited {
     text-decoration: none;
-    color: #808080;
+    color: #454545;
 }
 
 a:hover:visited {

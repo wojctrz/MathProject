@@ -11,9 +11,11 @@ using Math_Project.Models;
 using Microsoft.Extensions.DependencyInjection;
 using MathProject.Models;
 using Math_Project.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MathProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ManageAccountsController : Controller
     {
 
