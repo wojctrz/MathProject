@@ -185,5 +185,57 @@ namespace MathProject.Controllers
             return RedirectToAction("Create", "Hints", id);
         }
 
+        public async Task<IActionResult> Solve(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var question = await _context.Question
+                                 .Include(q => q.Hints)
+                                 .AsNoTracking()
+                                 .SingleOrDefaultAsync(m => m.ID == id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+
+            return View(question); 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Solve(int id, [Bind("ID,CorrectAnswer")] Question _question)
+        {
+            /*_question is a question with answer submitted by user
+             * corrquestion is a question with the correct answer grabbed from the database
+             */
+            if (_question == null)
+            {
+                return NotFound();
+            }
+
+            var corrquestion = await _context.Question.SingleOrDefaultAsync(m => m.ID == id);
+
+            if (_question.CorrectAnswer == corrquestion.CorrectAnswer)
+            {
+                return RedirectToAction(nameof(Good));
+            }
+            else
+            {
+                return RedirectToAction(nameof(Wrong));
+            }
+        }
+
+        public IActionResult Good()
+        {
+            return View();
+        }
+
+        public IActionResult Wrong()
+        {
+            return View();
+        }
+
     }
 }
