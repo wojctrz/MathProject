@@ -185,5 +185,68 @@ namespace MathProject.Controllers
             return RedirectToAction("Create", "Hints", id);
         }
 
+        public async Task<IActionResult> Solve(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var question = await _context.Question
+                                 .Include(q => q.Hints)
+                                 .AsNoTracking()
+                                 .SingleOrDefaultAsync(m => m.ID == id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+
+            QuestionToSolve questionToSolve = new QuestionToSolve(question);
+            return View(questionToSolve); 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Solve(int id, QuestionToSolve questionToSolve)
+        {
+            /*_question is a question with answer submitted by user
+             * corrquestion is a question with the correct answer grabbed from the database
+             */
+            if (questionToSolve == null)
+            {
+                return NotFound();
+            }
+
+            var corrquestion = await _context.Question.SingleOrDefaultAsync(m => m.ID == id);
+
+            questionToSolve.Content = corrquestion.Content;     //bind ręczny, bo model binder nie działa :/
+            questionToSolve.Hints = corrquestion.Hints;
+            if (questionToSolve.CorrectAnswer == corrquestion.CorrectAnswer)
+            {
+                questionToSolve.WasAnswered = true;
+                questionToSolve.WasCorrectlyAnswered = true;
+            }
+            else
+            {
+                questionToSolve.WasAnswered = true;
+                questionToSolve.WasCorrectlyAnswered = false;
+            }
+            return View(questionToSolve);
+        }
+
+        public IActionResult Good()
+        {
+            return View();
+        }
+
+        public IActionResult Wrong()
+        {
+            return View();
+        }
+
+        public IActionResult Test()
+        {
+            return View();
+        }
+
     }
 }

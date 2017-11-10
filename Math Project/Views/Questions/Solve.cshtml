@@ -1,0 +1,39 @@
+﻿@model MathProject.Models.QuestionToSolve
+
+@{
+    ViewData["Title"] = "Solve";
+}
+
+<h2>Zadanie</h2>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Solve">
+            <div class="form-group">
+                @Html.DisplayFor(Model => Model.Content)
+            </div>
+            <div class="form-group">
+                <input asp-for="CorrectAnswer" class="form-control" value="" />      
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Sprawdzmy" class="btn btn-default" />
+            </div>
+        </form>
+            <div>
+                @{
+                    if ((Model.WasAnswered == true) && (Model.WasCorrectlyAnswered == true))
+                    {
+                       @:Gratulacja to jest poprawna odpowiedźmożesz byc z sievie dumny
+                    }
+                    if ((Model.WasAnswered == true) && (Model.WasCorrectlyAnswered == false))
+                    {
+                        @:kepiej spróubuj jeszcze raz bo coś nie tak
+                    }
+                }
+            </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
