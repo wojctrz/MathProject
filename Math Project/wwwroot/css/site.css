@@ -11,8 +11,17 @@
     padding-right: 15px;
     background: rgba(24, 109, 110, 0.82);
 }
+#answer {
+    width: auto;
+}
+    
+.form-control {
+    display: inline-block;
+    width: auto; /* Prevent labels from stacking above inputs in `.form-group` */
+    vertical-align: middle;
 
-/* Carousel */
+             }
+    /* Carousel */
 .carousel-caption p {
     font-size: 20px;
     line-height: 1.4;

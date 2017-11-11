@@ -50,6 +50,7 @@ namespace MathProject.Controllers
 
             return Enum.TryParse<TEnum>(value, out result) ? (TEnum?)result : null;
         }
+
         // GET: Questions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -203,6 +204,32 @@ namespace MathProject.Controllers
         {
             return RedirectToAction("Create", "Hints", id);
         }
+        public async Task<IActionResult> Solve(int ? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var question = await _context.Question
+                                 .Include(q => q.Hints)
+                                 .AsNoTracking()
+                                 .SingleOrDefaultAsync(m => m.ID == id);
+            if (question == null)
+            {
+                return NotFound();
+            }
 
+            return View(question);
+        }
+        [HttpPost]
+        public async Task<bool> SolveAsync(int id, Question question)
+        {
+            var questionFromDB = await _context.Question.FirstOrDefaultAsync(m => m.ID == id);
+            if (question.CorrectAnswer == questionFromDB.CorrectAnswer)
+            {
+                return true;
+            }
+            else return false;
+        }
     }
 }
