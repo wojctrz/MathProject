@@ -34,22 +34,23 @@ namespace MathProject.Controllers
             var exercises = _context.Question.Where(q => q.Category == GetEnum<Categories>(categ));
             return View(await exercises.ToListAsync());
         }
-        public async Task<IActionResult> Exercise(int? id)
-        {
-            if(id==null)
-            {
-                return NotFound();
-            }
-            var question = await _context.Question.Where(q => q.ID == id).SingleOrDefaultAsync(q => q.ID == id);
-            return View( question);
+        //public async Task<IActionResult> Solve(int? id)
+        //{
+        //    if(id==null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var question = await _context.Question.Where(q => q.ID == id).SingleOrDefaultAsync(q => q.ID == id);
+        //    return View( question);
 
-        }
+        //}
             private static TEnum? GetEnum<TEnum>(string value) where TEnum : struct
         {
             TEnum result;
 
             return Enum.TryParse<TEnum>(value, out result) ? (TEnum?)result : null;
         }
+
         // GET: Questions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -71,7 +72,13 @@ namespace MathProject.Controllers
 
             return View(question);
         }
-        [Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ChooseToEdit()
+        {
+
+            return View(await _context.Question.ToListAsync());
+        }
+        [Authorize(Roles = "Admin")]
         // GET: Questions/Create
         public IActionResult Create()
         {
@@ -94,7 +101,20 @@ namespace MathProject.Controllers
             }
             return View(question);
         }
+        public async Task<IActionResult> ChooseHowToEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var question = await _context.Question.SingleOrDefaultAsync(m => m.ID == id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+            return View(question);
+        }
         // GET: Questions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

@@ -1,0 +1,14 @@
+﻿@model IEnumerable<MathProject.Models.Question>
+
+@{
+    ViewData["Title"] = "ChooseToEdit";
+}
+
+<h2>Wybierz pytanie które chcesz edytować</h2>
+
+@foreach(var item in Model)
+{
+    <a class="btn btn-tile" asp-action="ChooseHowToEdit" asp-route-id="@item.ID">@Html.DisplayFor(modelItem=> item.Content) </a>
+
+}
+      
