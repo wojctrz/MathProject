@@ -34,16 +34,16 @@ namespace MathProject.Controllers
             var exercises = _context.Question.Where(q => q.Category == GetEnum<Categories>(categ));
             return View(await exercises.ToListAsync());
         }
-        public async Task<IActionResult> Exercise(int? id)
-        {
-            if(id==null)
-            {
-                return NotFound();
-            }
-            var question = await _context.Question.Where(q => q.ID == id).SingleOrDefaultAsync(q => q.ID == id);
-            return View( question);
+        //public async Task<IActionResult> Solve(int? id)
+        //{
+        //    if(id==null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var question = await _context.Question.Where(q => q.ID == id).SingleOrDefaultAsync(q => q.ID == id);
+        //    return View( question);
 
-        }
+        //}
             private static TEnum? GetEnum<TEnum>(string value) where TEnum : struct
         {
             TEnum result;
@@ -222,14 +222,26 @@ namespace MathProject.Controllers
             return View(question);
         }
         [HttpPost]
-        public async Task<bool> SolveAsync(int id, Question question)
+        public async Task<IActionResult> SolveAsync(int id, [Bind("ID,Category,Content,CorrectAnswer")] Question question)
         {
+            if (question == null)
+            {
+                return NotFound();
+            }
             var questionFromDB = await _context.Question.FirstOrDefaultAsync(m => m.ID == id);
             if (question.CorrectAnswer == questionFromDB.CorrectAnswer)
             {
-                return true;
+                return RedirectToAction(nameof(Good));
             }
-            else return false;
+            else return RedirectToAction(nameof(Wrong));
+        }
+        public ActionResult Good()
+        {
+            return PartialView("Good");
+        }
+        public ActionResult Wrong()
+        {
+            return PartialView("Wrong");
         }
     }
 }
