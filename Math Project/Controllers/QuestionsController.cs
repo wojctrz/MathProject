@@ -203,7 +203,12 @@ namespace MathProject.Controllers
 
             return View(question); 
         }
-
+        public ActionResult Good()
+        {
+            
+                return PartialView("Good");
+           
+        }
         [HttpPost]
         public async Task<IActionResult> Solve(int id, [Bind("ID,CorrectAnswer")] Question _question)
         {
@@ -219,22 +224,24 @@ namespace MathProject.Controllers
 
             if (_question.CorrectAnswer == corrquestion.CorrectAnswer)
             {
+               
                 return RedirectToAction(nameof(Good));
             }
             else
             {
+                
                 return RedirectToAction(nameof(Wrong));
             }
         }
 
-        public IActionResult Good()
-        {
-            return View();
-        }
+        //public IActionResult Good()
+        //{
+        //    return View();
+        //}
 
         public IActionResult Wrong()
         {
-            return View();
+            return PartialView("Wrong");
         }
 
     }
