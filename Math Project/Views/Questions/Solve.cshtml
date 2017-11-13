@@ -1,39 +1,63 @@
-﻿@model MathProject.Models.QuestionToSolve
+﻿@model MathProject.Models.Question
 
 @{
     ViewData["Title"] = "Solve";
 }
 
 <h2>Zadanie</h2>
+
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Solve">
+        <form asp-action="Solve" id="question">
             <div class="form-group">
-                @Html.DisplayFor(Model => Model.Content)
+                @Html.DisplayFor(model => model.Content)
             </div>
             <div class="form-group">
-                <input asp-for="CorrectAnswer" class="form-control" value="" />      
+                <input asp-for="CorrectAnswer" class="form-control" value="" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Sprawdzmy" class="btn btn-default" />
+                <input type="submit" id="check" value="Sprawdzmy" class="btn btn-default" />
             </div>
         </form>
-            <div>
-                @{
-                    if ((Model.WasAnswered == true) && (Model.WasCorrectlyAnswered == true))
-                    {
-                       @:Gratulacja to jest poprawna odpowiedźmożesz byc z sievie dumny
-                    }
-                    if ((Model.WasAnswered == true) && (Model.WasCorrectlyAnswered == false))
-                    {
-                        @:kepiej spróubuj jeszcze raz bo coś nie tak
-                    }
-                }
+            @*<button id="check">Kliknij koniecznie</button>*@
+            
+            <div id="checked">
+              
             </div>
+
     </div>
 </div>
+@{ //both ways working, more or less the same effect
+    if (ViewBag.Result == "Good")
+    {
+        
+        @Html.Partial("Good");
+
+        //<h3>To dobra odpowiedź, gratulacje!</h3>
+    }
+    else if(ViewBag.Result == "Wrong")
+    {
+        @Html.Partial("Wrong");
+        //<h3>To zła odpowiedź, spróbuj jeszcze raz albo skorzystaj z hintów</h3>
+    }
 
 
+
+}
+
+@*<script>
+        var result = '@(ViewBag.Result)';
+
+        var url = 'https://localhost:44351/Questions/' + result;
+        var el = document.getElementById('question')
+        if (el) {
+            el.addEventListener('submit', function () {
+                document.getElementById('checked').innerHTML = '<object type="text/html" data="' + url + '" ></object>';
+                return false;
+            });
+        }
+
+</script>*@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    }

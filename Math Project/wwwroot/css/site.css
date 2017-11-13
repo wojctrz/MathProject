@@ -11,8 +11,17 @@
     padding-right: 15px;
     background: rgba(24, 109, 110, 0.82);
 }
+#answer {
+    width: auto;
+}
+    
+.form-control {
+    display: inline-block;
+    width: auto; /* Prevent labels from stacking above inputs in `.form-group` */
+    vertical-align: middle;
 
-/* Carousel */
+             }
+    /* Carousel */
 .carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
@@ -38,7 +47,7 @@
     }
 }
 
-.btn-tile{
+.btn-tile {
     font-size: large;
     background-color: cadetblue;
     width: 200px;
@@ -47,24 +56,32 @@
     padding: 10px;
     margin: 13px;
     line-height: 155px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
 }
 .btn-default{
     margin:13px;
+    color: #000000;
+    background-color:#114c57;
+    border:none;
 }
 
-    .btn-tile:hover {
+.btn-tile:hover {
         background-color: #114c57;
     }
 .btn-back {
     width: 200px;
     height: 67px;
     background-color: #000000;
-    margin:15px;
-    line-height:55px;
+    margin: 15px;
+    line-height: 55px;
+    color: #000000;
 }
 a:link {
     text-decoration: none;
-    color: #454545;
+    color: #ffffff;
 }
 
 a:hover {
@@ -74,7 +91,7 @@ a:hover {
 
 a:visited {
     text-decoration: none;
-    color: #454545;
+    color: #ffffff;
 }
 
 a:hover:visited {

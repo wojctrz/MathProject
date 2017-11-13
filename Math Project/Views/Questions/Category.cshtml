@@ -22,13 +22,13 @@
         }
     </div>*@
     <div>
-        <a class="btn btn-default" id="back" asp-action="Index">Powrot do kategorii </a>
+        <a class="btn btn-default" asp-action="Index">Powrot do kategorii </a>
     </div>
     <div>
         @foreach (var item in Model)
             {
             
-                <a class="btn btn-tile" asp-action="Exercise" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Content) </a>
+                <a class="btn btn-tile" asp-action="Solve" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Content) </a>
                     @*@Html.DisplayFor(modelItem => item.Category)
                 
                    

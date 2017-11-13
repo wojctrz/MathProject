@@ -34,22 +34,14 @@ namespace MathProject.Controllers
             var exercises = _context.Question.Where(q => q.Category == GetEnum<Categories>(categ));
             return View(await exercises.ToListAsync());
         }
-        public async Task<IActionResult> Exercise(int? id)
-        {
-            if(id==null)
-            {
-                return NotFound();
-            }
-            var question = await _context.Question.Where(q => q.ID == id).SingleOrDefaultAsync(q => q.ID == id);
-            return View( question);
-
-        }
+        
             private static TEnum? GetEnum<TEnum>(string value) where TEnum : struct
         {
             TEnum result;
 
             return Enum.TryParse<TEnum>(value, out result) ? (TEnum?)result : null;
         }
+
         // GET: Questions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -71,7 +63,13 @@ namespace MathProject.Controllers
 
             return View(question);
         }
-        [Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ChooseToEdit()
+        {
+
+            return View(await _context.Question.ToListAsync());
+        }
+        [Authorize(Roles = "Admin")]
         // GET: Questions/Create
         public IActionResult Create()
         {
@@ -94,7 +92,20 @@ namespace MathProject.Controllers
             }
             return View(question);
         }
+        public async Task<IActionResult> ChooseHowToEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var question = await _context.Question.SingleOrDefaultAsync(m => m.ID == id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+            return View(question);
+        }
         // GET: Questions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -201,51 +212,42 @@ namespace MathProject.Controllers
                 return NotFound();
             }
 
-            QuestionToSolve questionToSolve = new QuestionToSolve(question);
-            return View(questionToSolve); 
+            return View(question); 
         }
 
         [HttpPost]
-        public async Task<IActionResult> Solve(int id, QuestionToSolve questionToSolve)
+        public async Task<IActionResult> Solve(int id, Question _question)
         {
             /*_question is a question with answer submitted by user
              * corrquestion is a question with the correct answer grabbed from the database
              */
-            if (questionToSolve == null)
+            if (_question == null)
             {
                 return NotFound();
             }
 
             var corrquestion = await _context.Question.SingleOrDefaultAsync(m => m.ID == id);
 
-            questionToSolve.Content = corrquestion.Content;     //bind ręczny, bo model binder nie działa :/
-            questionToSolve.Hints = corrquestion.Hints;
-            if (questionToSolve.CorrectAnswer == corrquestion.CorrectAnswer)
+            if (_question.CorrectAnswer == corrquestion.CorrectAnswer)
             {
-                questionToSolve.WasAnswered = true;
-                questionToSolve.WasCorrectlyAnswered = true;
+                ViewBag.Result = "Good";   
             }
             else
             {
-                questionToSolve.WasAnswered = true;
-                questionToSolve.WasCorrectlyAnswered = false;
+                ViewBag.Result = "Wrong";
             }
-            return View(questionToSolve);
-        }
-
-        public IActionResult Good()
-        {
-            return View();
+            return View(_question);
         }
 
         public IActionResult Wrong()
         {
-            return View();
+                return View();
         }
-
-        public IActionResult Test()
+        public ActionResult Good()
         {
-            return View();
+            
+                return View();
+           
         }
 
     }
