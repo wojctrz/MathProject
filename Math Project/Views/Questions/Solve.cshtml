@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Solve">
+        <form asp-action="Solve" id="question">
             <div class="form-group">
                 @Html.DisplayFor(model => model.Content)
             </div>
@@ -27,3 +27,37 @@
 
     </div>
 </div>
+@{ //both ways working, more or less the same effect
+    if (ViewBag.Result == "Good")
+    {
+        
+        @Html.Partial("Good");
+
+        //<h3>To dobra odpowiedź, gratulacje!</h3>
+    }
+    else if(ViewBag.Result == "Wrong")
+    {
+        @Html.Partial("Wrong");
+        //<h3>To zła odpowiedź, spróbuj jeszcze raz albo skorzystaj z hintów</h3>
+    }
+
+
+
+}
+
+@*<script>
+        var result = '@(ViewBag.Result)';
+
+        var url = 'https://localhost:44351/Questions/' + result;
+        var el = document.getElementById('question')
+        if (el) {
+            el.addEventListener('submit', function () {
+                document.getElementById('checked').innerHTML = '<object type="text/html" data="' + url + '" ></object>';
+                return false;
+            });
+        }
+
+</script>*@
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

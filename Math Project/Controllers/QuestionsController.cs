@@ -34,16 +34,7 @@ namespace MathProject.Controllers
             var exercises = _context.Question.Where(q => q.Category == GetEnum<Categories>(categ));
             return View(await exercises.ToListAsync());
         }
-        //public async Task<IActionResult> Solve(int? id)
-        //{
-        //    if(id==null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var question = await _context.Question.Where(q => q.ID == id).SingleOrDefaultAsync(q => q.ID == id);
-        //    return View( question);
-
-        //}
+        
             private static TEnum? GetEnum<TEnum>(string value) where TEnum : struct
         {
             TEnum result;
@@ -223,14 +214,9 @@ namespace MathProject.Controllers
 
             return View(question); 
         }
-        public ActionResult Good()
-        {
-            
-                return PartialView("Good");
-           
-        }
+
         [HttpPost]
-        public async Task<IActionResult> Solve(int id, [Bind("ID,CorrectAnswer")] Question _question)
+        public async Task<IActionResult> Solve(int id, Question _question)
         {
             /*_question is a question with answer submitted by user
              * corrquestion is a question with the correct answer grabbed from the database
@@ -244,24 +230,24 @@ namespace MathProject.Controllers
 
             if (_question.CorrectAnswer == corrquestion.CorrectAnswer)
             {
-               
-                return RedirectToAction(nameof(Good));
+                ViewBag.Result = "Good";   
             }
             else
             {
-                
-                return RedirectToAction(nameof(Wrong));
+                ViewBag.Result = "Wrong";
             }
+            return View(_question);
         }
-
-        //public IActionResult Good()
-        //{
-        //    return View();
-        //}
 
         public IActionResult Wrong()
         {
-            return PartialView("Wrong");
+                return View();
+        }
+        public ActionResult Good()
+        {
+            
+                return View();
+           
         }
 
     }
