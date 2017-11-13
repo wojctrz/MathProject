@@ -236,7 +236,7 @@ namespace MathProject.Controllers
             {
                 ViewBag.Result = "Wrong";
             }
-            return View(_question);
+            return View(corrquestion);
         }
 
         public IActionResult Wrong()
