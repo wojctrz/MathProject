@@ -1,7 +1,4 @@
 ﻿
-$("#ShowOneHint").click(function () {
-    $("#ShowingHints").append("heja");
-})
 //var url = '@Url.Action("Good", "Questions")';
 //var url = 'https://localhost:44351/Questions/Good'
 

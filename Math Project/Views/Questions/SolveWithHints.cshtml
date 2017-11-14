@@ -5,42 +5,63 @@
 }
 
 <body>
-    @*<p>
-        Wyświetlanie za pomocą diplayfor model
-        <h3>@Html.DisplayFor(model => model.Content)</h3>
-    </p>*@
+    @*Wyświetlamy wszystkie hinty, po naciśnięciu przycisku wyświetla się pierwszy hint.
+        
+        
+    DO OGARNIĘCIA ! *@
     <p>
         Wyświetlanie za pomocą viewbaga:
-         <h3> @ViewBag.Task </h3>
+        <h3> @ViewBag.Task </h3>
     </p>
     <div>
-        <a class="btn btn-default" id="ShowOneHint">Pokaż podpowiedź </a>
-        <div id="ShowingHints">
-            
-
-        </div>
         @{
+            IEnumerable<string> listOfHints = new List<string>();
 
-            int i = 1;
+            int i = 0;
             foreach (var hint in Model)
             {
-                <h3> Podpowiedź numer @i</h3>
-                <p>@hint.Content</p>
+                listOfHints = listOfHints.Append(hint.Content.ToString()).ToList();
+            }
+            var listOfHintss = listOfHints.ToList();
+            foreach (var hint in listOfHintss)
+            {
+                <h3> Podpowiedź numer @(i + 1)</h3>
+                <p>@hint</p>
                 i++;
             }
-
-
+            i = 0;
         }
-           
+        <a class="btn btn-default" id="ShowOneHint" onclick="handleClick()">Pokaż podpowiedź </a>
+        <div id="ShowingHints">
+
+
+        </div>
+        @listOfHintss.Count
     </div>
+
+    
+    
+        
+    <script>
+
+        {
+            function handleClick() {
+               
+                if (@listOfHintss.Count>0)
+                {
+                    document.getElementById('ShowingHints').innerHTML = '@listOfHintss[i]';
+                    @(i = i + 1)
+ 
+                }
+                    return false;
+                
+            }
+        }
+    </script>
+        
+
+
 
 </body>
 
     
-<script type="text/javascript">
-
-    @*@{
-
-    }*@
-
-</script>
