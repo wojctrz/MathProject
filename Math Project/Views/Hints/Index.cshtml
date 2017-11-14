@@ -4,10 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>@Html.Raw(ViewBag.Result)</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @if(ViewBag.Result != "Index")
+    { 
+        <a asp-action="Create" asp-route-id=@Model.First().QuestionID>Dodaj nową</a>
+    }
 </p>
 <table class="table">
     <thead>
