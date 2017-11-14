@@ -249,6 +249,37 @@ namespace MathProject.Controllers
                 return View();
            
         }
+        public async Task<IActionResult> ChooseHowToSolve(int ? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var question = await _context.Question.SingleOrDefaultAsync(m => m.ID == id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+            return View(question);
+        }
+        public async Task<IActionResult> SolveWithHints(int ?id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            
+            var question = await _context.Question
+                                 .Include(q => q.Hints)
+                                 .AsNoTracking()
+                                 .SingleOrDefaultAsync(m => m.ID == id);
+           
+            ViewBag.Task = question.Content;
+
+            
+            return View(await _context.Hint.Where(m => m.QuestionID == id).ToListAsync());
+        }
 
     }
 }

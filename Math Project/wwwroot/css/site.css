@@ -14,7 +14,9 @@
 #answer {
     width: auto;
 }
-    
+#form-group{
+    width:auto;
+}   
 .form-control {
     display: inline-block;
     width: auto; /* Prevent labels from stacking above inputs in `.form-group` */

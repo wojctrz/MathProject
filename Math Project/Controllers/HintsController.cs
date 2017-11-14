@@ -151,5 +151,26 @@ namespace MathProject.Controllers
         {
             return _context.Hint.Any(e => e.ID == id);
         }
+        //public async Task<ActionResult> ShowOneHint(int questionID, int nrOfHint)
+        //{
+        //    if (questionID == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    List<Hint> listOfHints = new List<Hint>();
+        //    listOfHints = await _context.Hint.ToListAsync(m => m.QuestionID == questionID);
+        //       // .SingleOrDefaultAsync(m => m.QuestionID == questionID).ToListAsync();
+        //    foreach (var hint in listOfHints)
+        //    {
+        //        if (hint == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //    }
+        //    ViewBag.hints = listOfHints;
+        //    ViewBag.numberOfHints = listOfHints.Count;
+
+        //    return View(listOfHints);
+        //}
     }
 }

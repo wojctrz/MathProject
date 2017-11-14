@@ -6,20 +6,21 @@
 
 <h2>Zadanie</h2>
 
+        
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-7">
         <form asp-action="Solve" id="question">
             <div class="form-group">
-                @Html.DisplayFor(model => model.Content)
+                <h4> @Html.DisplayFor(model => model.Content)</h4>
             </div>
             <div class="form-group">
                 <input asp-for="CorrectAnswer" class="form-control" value="" />
             </div>
             <div class="form-group">
-                <input type="submit" id="check" value="Sprawdzmy" class="btn btn-default" />
+                <input type="submit" id="check" value="Sprawdźmy" class="btn btn-default" />
             </div>
         </form>
-            @*<button id="check">Kliknij koniecznie</button>*@
+            
             
             <div id="checked">
               
@@ -59,6 +60,10 @@
         }
 
 </script>*@
+
+<div>
+    <a class="btn btn-default" asp-action="Index">Powrót do kategorii </a>
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     }

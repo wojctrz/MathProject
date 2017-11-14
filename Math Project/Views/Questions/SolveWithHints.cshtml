@@ -1,0 +1,46 @@
+﻿@model IEnumerable<MathProject.Models.Hint>
+
+@{
+    ViewData["Title"] = "Rozwiązuj zadanie z podpowiedziami";
+}
+
+<body>
+    @*<p>
+        Wyświetlanie za pomocą diplayfor model
+        <h3>@Html.DisplayFor(model => model.Content)</h3>
+    </p>*@
+    <p>
+        Wyświetlanie za pomocą viewbaga:
+         <h3> @ViewBag.Task </h3>
+    </p>
+    <div>
+        <a class="btn btn-default" id="ShowOneHint">Pokaż podpowiedź </a>
+        <div id="ShowingHints">
+            
+
+        </div>
+        @{
+
+            int i = 1;
+            foreach (var hint in Model)
+            {
+                <h3> Podpowiedź numer @i</h3>
+                <p>@hint.Content</p>
+                i++;
+            }
+
+
+        }
+           
+    </div>
+
+</body>
+
+    
+<script type="text/javascript">
+
+    @*@{
+
+    }*@
+
+</script>

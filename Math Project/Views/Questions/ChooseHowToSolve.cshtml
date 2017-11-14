@@ -1,0 +1,13 @@
+﻿
+@model MathProject.Models.Question
+
+@{
+    ViewData["Title"] = "Wybierz sposób rozwiązywania";
+}
+<body>
+
+    <h2>Jak chcesz rozwiązać to zadanie?</h2>
+
+    <a class="btn btn-tile" asp-action="Solve" asp-route-id="@Model.ID">Rozwiązuję sam </a>
+    <a class="btn btn-tile" asp-action="SolveWithHints" asp-route-id="@Model.ID">Rozwiązuję z podpowiedziami </a>
+</body>

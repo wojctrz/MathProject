@@ -18,7 +18,13 @@
                 <th>
                     @Html.DisplayNameFor(model => model.CorrectAnswer)
                 </th>
-            <th></th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.QuestionID)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +35,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CorrectAnswer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
