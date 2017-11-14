@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MathProject.Models;
+using Microsoft.AspNetCore.Routing;
 
 namespace MathProject.Controllers
 {
     public class HintsController : Controller
     {
         private readonly MathProjectContext _context;
-        private int _qid;
 
         public HintsController(MathProjectContext context)
         {
@@ -20,9 +20,18 @@ namespace MathProject.Controllers
         }
 
         // GET: Hints
-        public async Task<IActionResult> Index()
+        [Route("/[controller]/{qid}")]
+        [Route("/[controller]")]
+        public async Task<IActionResult> Index(int? qid)
         {
-            return View(await _context.Hint.ToListAsync());
+            if(qid == null)
+            {
+                ViewBag.Result = "Index";
+                return View(await _context.Hint.ToListAsync());
+            }
+            var question = await _context.Question.SingleOrDefaultAsync(q => q.ID == qid);
+            ViewBag.Result = question.Content;
+            return View(await _context.Hint.Where(h => h.QuestionID == qid).ToListAsync());
         }
 
         // GET: Hints/Details/5
@@ -44,7 +53,8 @@ namespace MathProject.Controllers
         }
 
         // GET: Hints/Create
-        public IActionResult Create()
+        [Route("[Controller]/[action]/{questionid}")]
+        public IActionResult Create(int questionid)
         {
      
             return View();
@@ -62,7 +72,7 @@ namespace MathProject.Controllers
                 hint.QuestionID = questionid;
                 _context.Add(hint);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { qid = questionid });
             }
             return View(hint);
         }
