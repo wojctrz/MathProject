@@ -280,19 +280,57 @@ namespace MathProject.Controllers
 
         //    return View(await _context.Hint.Where(m => m.QuestionID == id).ToListAsync());
         //}
-        public ActionResult SolveWithHints(int? id)
+        public IActionResult SolveWithHints(int? questionID, int hintID)
         {
-            if (id == null)
+            if(_context.Hint.Where(m => m.QuestionID == questionID).ToList() == null)
+            {
+                return NotFound();
+            }
+            if (questionID == null)
             {
                 return NotFound();
             }
 
-            var question =  _context.Question.SingleOrDefault(m => m.ID == id);
-
+            var question =  _context.Question.SingleOrDefault(m => m.ID == questionID);
             ViewBag.Task = question.Content;
+            var hints = _context.Hint.Where(m => m.QuestionID == questionID).ToList();
+            ViewBag.Length = hints.Count;
+            
+
+            return View(hints[hintID]);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SolveWithHints(int questionID, int hintID, Hint hintFromUser)
+        {
+            // DLACZEGO QUESTIONID JEST RÓWNE 0 ??????? HELP    
 
 
-            return View( _context.Hint.Where(m => m.QuestionID == id).ToList());
+            /*hintFromUser is a question with answer submitted by user
+             * correctHint is a question with the correct answer grabbed from the database
+             */
+            if (hintFromUser == null)
+            {
+                return NotFound();
+            }
+            var correctListOfHints = await _context.Hint.Where(m => m.QuestionID == questionID).ToListAsync(); // list of all hints for given questionID
+            if(correctListOfHints.Count<1)
+            {
+                return NotFound();
+            }
+            var correctHint = correctListOfHints[hintID];
+
+            hintID++;
+
+            if (hintFromUser.CorrectAnswer == correctHint.CorrectAnswer) //wywala błąd, bo nie istnieje correctHint, bo questionID jest tutaj równe 0 :( 
+            { 
+                return RedirectToAction("SolveWithHints",new { questionID,hintID});
+            }
+            else
+            {
+                ViewBag.Result = "Wrong";
+                return View();
+            }
+            
         }
 
     }
