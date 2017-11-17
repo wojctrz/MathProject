@@ -59,7 +59,7 @@
                         <input asp-for="CorrectAnswer" class="form-control" value="" />
                     </div>
                     <div class="form-group">
-                        <input type="submit" id="check" value="Sprawdźmy" class="btn btn-default" />
+                        <input type="submit" id="check" value="Sprawdźmy" class="btn btn-default" asp-route-questionid="@Model.QuestionID"/>
                     </div>
                 </form>
 

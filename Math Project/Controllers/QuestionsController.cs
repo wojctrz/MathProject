@@ -302,12 +302,7 @@ namespace MathProject.Controllers
         [HttpPost]
         public async Task<IActionResult> SolveWithHints(int questionID, int hintID, Hint hintFromUser)
         {
-            // DLACZEGO QUESTIONID JEST RÓWNE 0 ??????? HELP    
 
-
-            /*hintFromUser is a question with answer submitted by user
-             * correctHint is a question with the correct answer grabbed from the database
-             */
             if (hintFromUser == null)
             {
                 return NotFound();
@@ -321,14 +316,14 @@ namespace MathProject.Controllers
 
             hintID++;
 
-            if (hintFromUser.CorrectAnswer == correctHint.CorrectAnswer) //wywala błąd, bo nie istnieje correctHint, bo questionID jest tutaj równe 0 :( 
+            if (hintFromUser.CorrectAnswer == correctHint.CorrectAnswer) 
             { 
                 return RedirectToAction("SolveWithHints",new { questionID,hintID});
             }
             else
             {
                 ViewBag.Result = "Wrong";
-                return View();
+                return View(correctHint);
             }
             
         }
