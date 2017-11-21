@@ -22,12 +22,8 @@
                     listOfHints = listOfHints.Append(hint.Content.ToString()).ToList();
                 }
 
-            }*@
-           
-                <h2>Podpowiedź nr 1</h2>
-
-
-            
+            }*@      
+                <h2>Podpowiedź nr @Html.Raw(ViewBag.hintID + 1)</h2>         
         </p>
 
         @*@{
@@ -59,7 +55,7 @@
                         <input asp-for="CorrectAnswer" class="form-control" value="" />
                     </div>
                     <div class="form-group">
-                        <input type="submit" id="check" value="Sprawdźmy" class="btn btn-default" asp-route-questionid="@Model.QuestionID"/>
+                        <input type="submit" id="check" value="Sprawdźmy" class="btn btn-default" asp-route-hintID="@ViewBag.hintID" asp-route-questionid="@Model.QuestionID"/>
                     </div>
                 </form>
 
