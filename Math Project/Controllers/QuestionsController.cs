@@ -20,6 +20,7 @@ namespace MathProject.Controllers
         }
 
         // GET: Questions
+        [Authorize(Roles = "Student")]
         public async Task<IActionResult> Index()
         {
          
@@ -43,6 +44,7 @@ namespace MathProject.Controllers
         }
 
         // GET: Questions/Details/5
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -63,13 +65,14 @@ namespace MathProject.Controllers
 
             return View(question);
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> ChooseToEdit()
         {
 
             return View(await _context.Question.ToListAsync());
         }
-        [Authorize(Roles = "Admin")]
+
+        [Authorize(Roles = "Teacher")]
         // GET: Questions/Create
         public IActionResult Create()
         {
@@ -92,6 +95,7 @@ namespace MathProject.Controllers
             }
             return View(question);
         }
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> ChooseHowToEdit(int? id)
         {
             if (id == null)
@@ -106,7 +110,9 @@ namespace MathProject.Controllers
             }
             return View(question);
         }
+
         // GET: Questions/Edit/5
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -125,6 +131,7 @@ namespace MathProject.Controllers
         // POST: Questions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Teacher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Category,Content,CorrectAnswer")] Question question)
@@ -158,6 +165,7 @@ namespace MathProject.Controllers
         }
 
         // GET: Questions/Delete/5
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -176,6 +184,7 @@ namespace MathProject.Controllers
         }
 
         // POST: Questions/Delete/5
+        [Authorize(Roles = "Teacher")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -191,11 +200,13 @@ namespace MathProject.Controllers
             return _context.Question.Any(e => e.ID == id);
         }
 
-        public ActionResult AddHint(int id)         //NAD TYM JESZCZE PRACUJE TO NIE DZIAŁA NA RAZIE
+        [Authorize(Roles = "Teacher")]
+        public ActionResult AddHint(int id)         //Już działa !!!!!!
         {
-            return RedirectToAction("Create", "Hints", id);
+            return RedirectToAction("Create", "Hints", new { questionid = id });
         }
 
+        [Authorize(Roles = "Student")]
         public async Task<IActionResult> Solve(int? id)
         {
             if (id == null)
@@ -215,6 +226,7 @@ namespace MathProject.Controllers
             return View(question); 
         }
 
+        [Authorize(Roles = "Student")]
         [HttpPost]
         public async Task<IActionResult> Solve(int id, Question _question)
         {

@@ -16,18 +16,24 @@
 }
 #form-group{
     width:auto;
-}   
+}
 .form-control {
     display: inline-block;
     width: auto; /* Prevent labels from stacking above inputs in `.form-group` */
     vertical-align: middle;
+}
+.form-control-wide {
+    display: inline-block;
+    width: auto; /* Prevent labels from stacking above inputs in `.form-group` */
+    vertical-align: middle;
+    min-width: 400px;
+}
 
-             }
     /* Carousel */
 .carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
-    background: #ffd800;
+    color: aliceblue;
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
