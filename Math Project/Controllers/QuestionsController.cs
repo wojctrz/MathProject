@@ -302,7 +302,7 @@ namespace MathProject.Controllers
         [HttpPost]
         public async Task<IActionResult> SolveWithHints(int questionID, int hintID, Hint hintFromUser)
         {
-
+            ViewBag.Task = _context.Question.SingleOrDefault(m => m.ID == questionID).Content;
             if (hintFromUser == null)
             {
                 return NotFound();
@@ -318,7 +318,7 @@ namespace MathProject.Controllers
 
             if (hintFromUser.CorrectAnswer == correctHint.CorrectAnswer) 
             { 
-                return RedirectToAction("SolveWithHints",new { questionID,hintID});
+                return RedirectToAction("SolveWithHints", new { questionID = questionID, hintID=hintID });
             }
             else
             {
