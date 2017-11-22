@@ -282,6 +282,7 @@ namespace MathProject.Controllers
         //}
         public IActionResult SolveWithHints(int? questionID, int hintID)
         {
+            
             if(_context.Hint.Where(m => m.QuestionID == questionID).ToList() == null)
             {
                 return NotFound();
@@ -294,8 +295,18 @@ namespace MathProject.Controllers
             var question =  _context.Question.SingleOrDefault(m => m.ID == questionID);
             ViewBag.Task = question.Content;
             var hints = _context.Hint.Where(m => m.QuestionID == questionID).ToList();
+
+            /*TODO
+            *jak był ostatni hint dobrze odpowiedziany
+            * (czyli chyba jak hintID jest większe od rozmiaru listy czy coś)
+            * to przekierowuje do czego tam powinno przekierować
+            */
+            if (hintID == hints.Count)
+            {
+                return RedirectToAction(nameof(Solve), new { id = questionID });
+            }
             ViewBag.Length = hints.Count;
-            
+            ViewBag.hintID = hintID;
 
             return View(hints[hintID]);
         }
@@ -314,14 +325,16 @@ namespace MathProject.Controllers
             }
             var correctHint = correctListOfHints[hintID];
 
-            hintID++;
 
             if (hintFromUser.CorrectAnswer == correctHint.CorrectAnswer) 
-            { 
-                return RedirectToAction("SolveWithHints", new { questionID = questionID, hintID=hintID });
+            {
+                
+                ViewBag.hintID = hintID + 1;
+                return RedirectToAction("SolveWithHints",new { questionID = questionID, hintID = hintID + 1});
             }
             else
             {
+                ViewBag.hintID = hintID;
                 ViewBag.Result = "Wrong";
                 return View(correctHint);
             }
