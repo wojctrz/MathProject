@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace MathProject.Controllers
 {
     [Authorize(Roles = "Teacher")]
+    [Authorize(Roles = "Admin")]
     public class HintsController : Controller
     {
         private readonly MathProjectContext _context;
