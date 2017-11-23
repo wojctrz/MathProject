@@ -28,7 +28,7 @@
         @foreach (var item in Model)
             {
             
-                <a class="btn btn-tile" asp-action="ChooseHowToSolve" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Content) </a>
+                <a class="btn btn-tile-task" asp-action="ChooseHowToSolve" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Content) </a>
                     @*@Html.DisplayFor(modelItem => item.Category)
                 
                    

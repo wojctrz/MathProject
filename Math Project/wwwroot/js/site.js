@@ -2,9 +2,9 @@
 //var url = '@Url.Action("Good", "Questions")';
 //var url = 'https://localhost:44351/Questions/Good'
 
-//testing
-//$("#check").click(function () {
-//    $("#checked").append("hejka naklejka ");
+
+//$("#more").hover(function () {
+//    $("#more").append("fast");
 //})
 
 //$.ajax({

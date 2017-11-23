@@ -9,7 +9,13 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    background: rgba(24, 109, 110, 0.82);
+    /*background: rgba(24, 100, 115, 0.82);*/
+    background: rgba(125, 125, 125, 0.57);
+}
+#test1 {
+    width: 200px;
+    height: 100px;
+    overflow: hidden;
 }
 #answer {
     width: auto;
@@ -49,30 +55,43 @@
     }
 }
 
-.btn-tile {
+.btn-tile, .btn-tile-task {
     font-size: large;
-    background-color: cadetblue;
+    background-color: rgba(255, 212, 212, 0.90);
+    /*background-color: rgba(26, 151, 164, 0.83);*/
     width: 200px;
     height: 200px;
-    text-align: center;
-    padding: 10px;
-    margin: 13px;
-    line-height: 155px;
-    overflow: hidden;
+    margin: 8px;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    
+    white-space: normal;
+    overflow: hidden;
+
 }
-.btn-default{
-    margin:13px;
+.btn-tile {
+    line-height: 156px;
+}
+.btn-tile-task {
+    display: inline-block;
+    text-align: center;
+    padding-top: 3.75%;
+    padding-bottom: 1%;
+    vertical-align: middle;
+    overflow: hidden;
+}
+#button-text {
+    margin-top: auto;
+}
+.btn-default {
+    margin: 13px;
     color: #000000;
-    background-color:#114c57;
-    border:none;
+    background-color: #ffbcbc;
+    border: none;
 }
 
-.btn-tile:hover {
-        background-color: #114c57;
-    }
+.btn-tile:hover, .btn-tile-task:hover {
+    background-color: rgba(255, 164, 164, 0.98);
+    color: #ffffff;
+}
 .btn-back {
     width: 200px;
     height: 67px;
@@ -88,7 +107,7 @@ a:link {
 
 a:hover {
     text-decoration: none;
-    color: cadetblue;
+    color: #ffbcbc;
 }
 
 a:visited {
@@ -98,5 +117,5 @@ a:visited {
 
 a:hover:visited {
     text-decoration: none;
-    color: cadetblue;
+    color: #ffffff;
 }

@@ -8,7 +8,10 @@
 
 @foreach(var item in Model)
 {
-    <a class="btn btn-tile" asp-action="ChooseHowToEdit" asp-route-id="@item.ID">@Html.DisplayFor(modelItem=> item.Content) </a>
+    <a class="btn btn-tile-task" id="more" asp-action="ChooseHowToEdit" asp-route-id="@item.ID">@Html.DisplayFor(modelItem=> item.Content) </a>
 
 }
+<div id="checked">
+
+</div>
       
