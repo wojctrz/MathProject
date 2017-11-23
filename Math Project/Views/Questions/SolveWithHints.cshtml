@@ -5,46 +5,12 @@
 }
 
 <body>
-    @*Wyświetlamy wszystkie hinty, po naciśnięciu przycisku wyświetla się pierwszy hint.
-        
-        
-    DO OGARNIĘCIA ! *@
     <p>
         <h3> @ViewBag.Task </h3>
     </p>
-    <div>
-        
-        <p>
-            @*@{ 
-                List<string> listOfHints = new List<string>();
-                foreach (var hint in Model)
-                {
-                    listOfHints = listOfHints.Append(hint.Content.ToString()).ToList();
-                }
-
-            }*@      
+    <div>   
                 <h2>Podpowiedź nr @Html.Raw(ViewBag.hintID + 1)</h2>         
-        </p>
-
-        @*@{
-            IEnumerable<string> listOfHints = new List<string>();
-
-            int i = 0;
-            foreach (var hint in Model)
-            {
-                listOfHints = listOfHints.Append(hint.Content.ToString()).ToList();
-            }
-            var listOfHintss = listOfHints.ToList();
-            foreach (var hint in listOfHintss)
-            {
-                <h3> Podpowiedź numer @(i + 1)</h3>
-                <p>@hint</p>
-                i++;
-            }
-            i = 0;
-        }*@
-        @*<a class="btn btn-default" id="ShowOneHint" onclick="handleClick()">Pokaż podpowiedź </a>*@
-        @*<a class=" btn btn-default" asp-action=" ShowHint" asp-route-questionid =""*@
+     
         <div class="row">
             <div class="col-md-7">
                 <form asp-action="SolveWithHints" id="question">
@@ -74,32 +40,8 @@
 
 
         </div>
-       
-    </div>
-
-    
-    
-        
-    @*<script>
-
-        {
-            function handleClick() {
-               
-                if (@listOfHintss.Count>0)
-                {
-                    document.getElementById('ShowingHints').innerHTML = '@listOfHintss[i]';
-                    @(i = i + 1)
+       </div>
  
-                }
-                    return false;
-                
-            }
-        }
-    </script>*@
-        
-
-
-
 </body>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

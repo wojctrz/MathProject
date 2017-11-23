@@ -1,7 +1,7 @@
 ﻿@model MathProject.Models.Question
 
 @{
-    ViewData["Title"] = "Solve";
+    ViewData["Title"] = "Rozwiązuj zadanie";
 }
 
 <h2>Zadanie</h2>
@@ -46,20 +46,6 @@
 
 
 }
-
-@*<script>
-        var result = '@(ViewBag.Result)';
-
-        var url = 'https://localhost:44351/Questions/' + result;
-        var el = document.getElementById('question')
-        if (el) {
-            el.addEventListener('submit', function () {
-                document.getElementById('checked').innerHTML = '<object type="text/html" data="' + url + '" ></object>';
-                return false;
-            });
-        }
-
-</script>*@
 
 <div>
     <a class="btn btn-default" asp-action="Index">Powrót do kategorii </a>

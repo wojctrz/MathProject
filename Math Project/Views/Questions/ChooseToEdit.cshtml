@@ -1,16 +1,18 @@
 ﻿@model IEnumerable<MathProject.Models.Question>
 
 @{
-    ViewData["Title"] = "ChooseToEdit";
+    ViewData["Title"] = "Edycja";
 }
 
 <h2>Wybierz pytanie które chcesz edytować</h2>
+<div class="table">
+    @foreach (var item in Model)
+    {
+        <a class="btn btn-tile-task" asp-action="ChooseHowToEdit" asp-route-id="@item.ID"><span class="inside-button">
+            @Html.DisplayFor(modelItem => item.Content)</span> </a>
 
-@foreach(var item in Model)
-{
-    <a class="btn btn-tile-task" id="more" asp-action="ChooseHowToEdit" asp-route-id="@item.ID">@Html.DisplayFor(modelItem=> item.Content) </a>
-
-}
+    }
+</div>
 <div id="checked">
 
 </div>

@@ -73,24 +73,42 @@
 .btn-tile-task {
     display: inline-block;
     text-align: center;
-    padding-top: 3.75%;
+    padding-top: 2%;
     padding-bottom: 1%;
     vertical-align: middle;
     overflow: hidden;
+    /*display: table-cell;
+    padding: 5px;
+    width:20%;*/
 }
-#button-text {
-    margin-top: auto;
-}
+/*.table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 10px;
+    table-layout:fixed;
+    width:100%;
+}*/
+
 .btn-default {
     margin: 13px;
-    color: #000000;
+    color: #ffffff;
     background-color: #ffbcbc;
     border: none;
 }
-
+.btn-default:hover, .btn-default:hover:visited{
+    color: #000000;
+    
+}
 .btn-tile:hover, .btn-tile-task:hover {
     background-color: rgba(255, 164, 164, 0.98);
     color: #ffffff;
+}
+.inside-button{
+    overflow: hidden;
+    display: table-cell;
+    vertical-align: middle;
+    width: 190px;
+    height: 150px;
 }
 .btn-back {
     width: 200px;

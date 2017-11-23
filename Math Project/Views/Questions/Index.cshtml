@@ -1,12 +1,13 @@
 ﻿@model IEnumerable<MathProject.Models.Question>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Wybierz kategorię";
 }
 <body>
 
-    <h2>Zadania</h2>
-    <div id="pytanka">
+    <h2>Wybierz kategorię</h2>
+    <hr />
+    <div>
         @using MathProject.Models;
         @{
             int length = Enum.GetNames(typeof(Categories)).Length;

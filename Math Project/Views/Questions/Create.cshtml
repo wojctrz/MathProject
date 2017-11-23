@@ -1,13 +1,13 @@
 ﻿@model MathProject.Models.Question
 @using MathProject.Models;
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Utwórz nowe zadanie";
 }
 
-<h2>Dodaj</h2>
 
-<h4>Pytanie</h4>
-<hr />
+
+<h2>Utwórz nowe zadanie</h2>
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -45,10 +45,10 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-default" asp-action= "Index">Powrót</a>
 </div>
 
-}
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     }
