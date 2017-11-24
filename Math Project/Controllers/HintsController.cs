@@ -66,9 +66,9 @@ namespace MathProject.Controllers
         // POST: Hints/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost("[controller]/[action]/{questionid}")]
+        [HttpPost("[controller]/[action]/{qid}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Content,CorrectAnswer")] Hint hint, int qid)
+        public async Task<IActionResult> Create([Bind("Content","CorrectAnswer")] Hint hint, int qid)
         {
             if (ModelState.IsValid)
             {

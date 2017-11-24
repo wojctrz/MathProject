@@ -41,6 +41,24 @@ namespace MathProject.Controllers
             return View(await _context.Users.ToListAsync());
         }
 
+        public async Task<IActionResult> GrantStudent(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                var user = await _context.ApplicationUser.SingleAsync(u => u.Id == id);
+                var roleresult = await _UserManager.AddToRoleAsync(user, "Student");
+            }
+            catch
+            {
+                return NotFound();
+            }
+            return RedirectToAction(nameof(Index));
+        }
 
         public async Task<IActionResult> GrantTeacher(string id)
         {
