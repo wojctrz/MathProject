@@ -5,8 +5,9 @@
     ViewData["Title"] = "Wybierz sposób edycji";
 }
 
-<h2>Co chcesz teraz zrobić?</h2>
 
+<h2>Co chcesz teraz zrobić?</h2>
+<hr/>
     <a class="btn btn-tile" asp-action="Edit" asp-route-id="@Model.ID"><span class="inside-button">Edytuj</span> </a>
     <a class="btn btn-tile" asp-action="Delete" asp-route-id="@Model.ID"><span class="inside-button">Usuń zadanie</span> </a>
     <a class="btn btn-tile" asp-action="Details" asp-route-id="@Model.ID"><span class="inside-button">Pokaż szczegóły </span></a>
