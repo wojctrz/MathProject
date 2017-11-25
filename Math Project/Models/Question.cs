@@ -12,6 +12,7 @@ namespace MathProject.Models
         Trygonometria,
         Stereometria,
         Planimetria,
+        [DisplayName("Funkcja kwaderatow")]
         FunkcjaKwadratowa
     }
     public class Question

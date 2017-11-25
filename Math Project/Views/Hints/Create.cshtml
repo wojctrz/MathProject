@@ -1,15 +1,15 @@
 ﻿@model MathProject.Models.Hint
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Dodaj podpowiedź";
 }
 
-<h2>Create</h2>
+<h2>Dodaj</h2>
 
-<h4>Hint</h4>
+<h4>Podpowiedź</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<div class="form-group">
@@ -18,7 +18,7 @@
             </div>*@
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
+                <input asp-for="Content" class="form-control-wide" />
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
             <div class="form-group">

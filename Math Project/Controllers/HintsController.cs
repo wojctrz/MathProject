@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MathProject.Models;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MathProject.Controllers
 {
+    [Authorize(Roles = "Teacher")]
+    [Authorize(Roles = "Admin")]
     public class HintsController : Controller
     {
         private readonly MathProjectContext _context;
@@ -22,16 +25,16 @@ namespace MathProject.Controllers
         // GET: Hints
         [Route("/[controller]/{qid}")]
         [Route("/[controller]")]
-        public async Task<IActionResult> Index(int? qid)
+        public async Task<IActionResult> Index(int? questionid)
         {
-            if(qid == null)
+            if(questionid == null)
             {
                 ViewBag.Result = "Index";
                 return View(await _context.Hint.ToListAsync());
             }
-            var question = await _context.Question.SingleOrDefaultAsync(q => q.ID == qid);
+            var question = await _context.Question.SingleOrDefaultAsync(q => q.ID == questionid);
             ViewBag.Result = question.Content;
-            return View(await _context.Hint.Where(h => h.QuestionID == qid).ToListAsync());
+            return View(await _context.Hint.Where(h => h.QuestionID == questionid).ToListAsync());
         }
 
         // GET: Hints/Details/5
@@ -63,16 +66,16 @@ namespace MathProject.Controllers
         // POST: Hints/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost("[controller]/[action]/{questionid}")]
+        [HttpPost("[controller]/[action]/{qid}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Content,CorrectAnswer")] Hint hint, int questionid)
+        public async Task<IActionResult> Create([Bind("Content","CorrectAnswer")] Hint hint, int qid)
         {
             if (ModelState.IsValid)
             {
-                hint.QuestionID = questionid;
+                hint.QuestionID = qid;
                 _context.Add(hint);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", new { qid = questionid });
+                return RedirectToAction("Index", new { questionid = qid });
             }
             return View(hint);
         }
