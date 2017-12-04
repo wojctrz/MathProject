@@ -291,6 +291,7 @@ namespace MathProject.Controllers
 
         //    return View(await _context.Hint.Where(m => m.QuestionID == id).ToListAsync());
         //}
+        //[Route("/[controller]/{questionID}/{hintID}")]
         public IActionResult SolveWithHints(int? questionID, int hintID)
         {
             
