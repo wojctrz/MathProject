@@ -18,7 +18,8 @@
             </div>
             <div class="form-group">
                 <input type="submit" id="check" value="Sprawdźmy" class="btn btn-default" />|
-                <a class="btn btn-default" asp-action="Index">Powrót do kategorii </a>
+                <a class="btn btn-default" asp-action="Index">Powrót do kategorii </a>|
+                <a class="btn btn-default" asp-action="PickRandomQuestionAndSolve" asp-route-questionID="@Model.ID">Losuj kolejne zadanie</a>
             </div>
         </form>
             
@@ -30,7 +31,7 @@
     </div>
 </div>
 @{ //both ways working, more or less the same effect
-    if (ViewBag.Result == "Good")
+     if (ViewBag.Result == "Good")
     {
         
         @Html.Partial("Good");
