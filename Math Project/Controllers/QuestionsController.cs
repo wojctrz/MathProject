@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MathProject.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
 
 namespace MathProject.Controllers
 {
@@ -23,11 +24,11 @@ namespace MathProject.Controllers
         // GET: Questions
         public async Task<IActionResult> Index()
         {
-         
-                return View(await _context.Question.ToListAsync());
-            
 
-           // var exercises = _context.Question.Where(q => q.Category == GetEnum<Categories>(categ));
+            return View(await _context.Question.ToListAsync());
+
+
+            // var exercises = _context.Question.Where(q => q.Category == GetEnum<Categories>(categ));
             //return View(await exercises.ToListAsync());
         }
         public async Task<IActionResult> Category(string categ)
@@ -35,8 +36,8 @@ namespace MathProject.Controllers
             var exercises = _context.Question.Where(q => q.Category == GetEnum<Categories>(categ));
             return View(await exercises.ToListAsync());
         }
-        
-            private static TEnum? GetEnum<TEnum>(string value) where TEnum : struct
+
+        private static TEnum? GetEnum<TEnum>(string value) where TEnum : struct
         {
             TEnum result;
 
@@ -222,7 +223,7 @@ namespace MathProject.Controllers
                 return NotFound();
             }
 
-            return View(question); 
+            return View(question);
         }
 
         [HttpPost]
@@ -240,7 +241,7 @@ namespace MathProject.Controllers
 
             if (_question.CorrectAnswer == corrquestion.CorrectAnswer)
             {
-                ViewBag.Result = "Good";   
+                ViewBag.Result = "Good";
             }
             else
             {
@@ -251,16 +252,16 @@ namespace MathProject.Controllers
 
         public IActionResult Wrong()
         {
-                return View();
+            return View();
         }
         public ActionResult Good()
         {
-            
-                return View();
-           
+
+            return View();
+
         }
 
-        public async Task<IActionResult> ChooseHowToSolve(int ? id)
+        public async Task<IActionResult> ChooseHowToSolve(int? id)
         {
             if (id == null)
             {
@@ -295,8 +296,8 @@ namespace MathProject.Controllers
         [Route("/[controller]/[action]/{questionID}/{hintID}")]
         public IActionResult SolveWithHints(int? questionID, int hintID)
         {
-            
-            if(_context.Hint.Where(m => m.QuestionID == questionID).ToList() == null)
+
+            if (_context.Hint.Where(m => m.QuestionID == questionID).ToList() == null)
             {
                 return NotFound();
             }
@@ -305,7 +306,7 @@ namespace MathProject.Controllers
                 return NotFound();
             }
 
-            var question =  _context.Question.SingleOrDefault(m => m.ID == questionID);
+            var question = _context.Question.SingleOrDefault(m => m.ID == questionID);
             ViewBag.Task = question.Content;
             var hints = _context.Hint.Where(m => m.QuestionID == questionID).ToList();
 
@@ -324,6 +325,7 @@ namespace MathProject.Controllers
             return View(hints[hintID]);
         }
         [HttpPost]
+        [Route("/[controller]/[action]/{questionID}/{hintID}")]
         public async Task<IActionResult> SolveWithHints(int questionID, int hintID, Hint hintFromUser)
         {
             ViewBag.Task = _context.Question.SingleOrDefault(m => m.ID == questionID).Content;
@@ -332,18 +334,18 @@ namespace MathProject.Controllers
                 return NotFound();
             }
             var correctListOfHints = await _context.Hint.Where(m => m.QuestionID == questionID).ToListAsync(); // list of all hints for given questionID
-            if(correctListOfHints.Count<1)
+            if (correctListOfHints.Count < 1)
             {
                 return NotFound();
             }
             var correctHint = correctListOfHints[hintID];
 
 
-            if (hintFromUser.CorrectAnswer == correctHint.CorrectAnswer) 
+            if (hintFromUser.CorrectAnswer == correctHint.CorrectAnswer)
             {
-                
+
                 ViewBag.hintID = hintID + 1;
-                return RedirectToAction("SolveWithHints",new { questionID = questionID, hintID = hintID + 1});
+                return RedirectToAction("SolveWithHints", new { questionID = questionID, hintID = hintID + 1 });
             }
             else
             {
@@ -351,7 +353,7 @@ namespace MathProject.Controllers
                 ViewBag.Result = "Wrong";
                 return View(correctHint);
             }
-            
+
         }
 
     }
