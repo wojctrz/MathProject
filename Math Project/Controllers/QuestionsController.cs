@@ -355,6 +355,20 @@ namespace MathProject.Controllers
             }
 
         }
+        public IActionResult PickRandomQuestionAndSolve(int questionID)
+        {
+            var maxID = _context.Question.OrderByDescending(u => u.ID).FirstOrDefault().ID;
+            var minID = _context.Question.OrderByDescending(u => u.ID).LastOrDefault().ID;
+            Random random = new Random();
+            int newQuestionID;
+            do
+            {
+                newQuestionID = random.Next(minID-1, maxID+1);
+            } while (!QuestionExists(newQuestionID)||questionID==newQuestionID);
+
+
+            return RedirectToAction("Solve", new { id= newQuestionID });
+        }
 
     }
 }

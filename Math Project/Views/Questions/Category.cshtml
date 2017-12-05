@@ -7,15 +7,15 @@
 <div id="pytanka">
     <h2> Wybierz zadanie</h2>
     <hr/>
-    <div>
-        <a class="btn btn-default" asp-action="Index">Powrot do kategorii </a>
-    </div>
     <div class="table">
         @foreach (var item in Model)
         {   
                 <a class="btn btn-tile-task" asp-action="ChooseHowToSolve" asp-route-id="@item.ID"><span class="inside-button">@Html.DisplayFor(modelItem => item.Content) </span></a>   
         }
 
+    </div>
+    <div>
+        <a class="btn btn-default" asp-action="Index">Powrot do kategorii </a>
     </div>
 
 </div>
