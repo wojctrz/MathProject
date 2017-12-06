@@ -30,29 +30,28 @@
     </dl>
     <div>
         <h3>Podpowiedzi</h3>
-        <hr/>
-
-        <table border="1" cellspacing="10">
+        <table class="table">
             <thead>
                 <tr>
+                    
                     <th>Treść podpowiedzi</th>
-                    <th>Odpowiedź</th>
+                    <th>Poprawna odpowiedź</th>
                 </tr>
             </thead>
             <tbody>
-                
-                    @foreach (var item in Model.Hints)
-                    {
-                        <tr>
-                            <th>
-                                @Html.DisplayFor(modelItem => item.Content)
-                            </th>
-                            <th>
-                                @Html.DisplayFor(modelItem => item.CorrectAnswer)
-                            </th>
-                        </tr>
-                    }
-                
+
+                @foreach (var item in Model.Hints)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CorrectAnswer)
+                </td>
+            </tr>
+}
+
             </tbody>
         </table>
         @*<dl class="dl-horizontal">

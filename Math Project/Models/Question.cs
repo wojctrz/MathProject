@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace MathProject.Models
 {
@@ -12,7 +13,7 @@ namespace MathProject.Models
         Trygonometria,
         Stereometria,
         Planimetria,
-        [DisplayName("Funkcja kwaderatow")]
+        [Display(Name = "Funkcja Kwadratowa")]
         FunkcjaKwadratowa
     }
     public class Question
