@@ -11,7 +11,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MathProject.Controllers
 {
-    [Authorize(Roles = "Student")]
+    //[Authorize(Roles = "Student")]
     public class QuestionsController : Controller
     {
         private readonly MathProjectContext _context;
